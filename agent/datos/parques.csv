@@ -1,0 +1,11 @@
+origen_id,nombre,municipio,lon,lat,en_base,fuente,snap_m,nota
+DON-GARBERA,Parque de Garbera (Donostia),Donostia,-1.9476,43.3113,1,SRC-B5M-FIREST,49.2,Donostia municipal fire service (operator from v0.1; B5M has no operator field). Posición oficial B5M (no comprobada en ortofoto).
+GIP-ARRATE,Parque de Arrate,Eibar,-2.451,43.1912,1,SRC-B5M-FIREST,24.0,Posición oficial B5M (no comprobada en ortofoto).
+GIP-BIDASOA,Parque de Bidasoa,Irun,-1.8233,43.3305,1,SRC-B5M-FIREST,18.9,Posición oficial B5M (no comprobada en ortofoto).
+GIP-GOIERRI,Parque de Goierri,Ordizia,-2.1822,43.0491,1,SRC-B5M-FIREST,21.0,Posición oficial B5M (no comprobada en ortofoto).
+GIP-KOROSTI,Parque de Korosti,Legazpi,-2.3356,43.0651,1,SRC-B5M-FIREST,19.5,Posición oficial B5M (no comprobada en ortofoto).
+GIP-KOSTA,Parque de Kosta,Zarautz,-2.1613,43.282,1,SRC-B5M-FIREST,17.2,Posición oficial B5M (no comprobada en ortofoto).
+GIP-ORIA,Parque de Oria,Tolosa,-2.0803,43.1287,1,SRC-B5M-FIREST,17.6,Posición oficial B5M (no comprobada en ortofoto).
+GIP-UROLA,Parque de Urola,Azpeitia,-2.2648,43.1778,1,SRC-B5M-FIREST,21.2,Posición oficial B5M (no comprobada en ortofoto).
+GIP-ZUBILLAGA,Parque de Zubillaga,Oñati,-2.4425,43.0657,1,SRC-B5M-FIREST,23.3,Posición oficial B5M (no comprobada en ortofoto).
+OTH-HONDARRIBIA,"Bomberos (Gabarrari kalea, Hondarribia)",Hondarribia,-1.7944,43.3551,0,SRC-B5M-FIREST,68.6,"Not a DFG park: name 'Suhiltzaileak / Bomberos' and point at Gabarrari kalea 24 = San Sebastián airport area (likely AENA airport fire service, to verify). Kept, excluded from baseline. Posición oficial B5M (no comprobada en ortofoto)."

@@ -1,0 +1,46 @@
+{
+ "version": "P1-v1 (2026-10-03) · datos v0.3.2 · reglas PRIO-v1",
+ "edificios_analisis": 3331,
+ "viviendas_analisis": 10651,
+ "prioridad": {
+  "Baja": 2127,
+  "Media": 961,
+  "Alta": 243
+ },
+ "viviendas_por_prioridad": {
+  "Alta": 283,
+  "Baja": 8667,
+  "Media": 1701
+ },
+ "prioridad_sin_acceso": {
+  "Baja": 1673,
+  "Media": 1196,
+  "Alta": 462
+ },
+ "alta_sin_ruta": 34,
+ "acceso_bandas": {
+  "≤8": 1778,
+  "8–12": 934,
+  "12–15": 436,
+  ">15": 136,
+  "sin ruta": 47
+ },
+ "alta_dentro_12min_k0": 49,
+ "alta_dentro_12min_k3_CAND01_02_03": 177,
+ "meteo_zonas_distinguibles": "no",
+ "meteo_dias_riesgo_anuales_media": 26.3,
+ "meteo_reparto": {
+  "feb-abr": 0.32,
+  "jul-ago": 0.14,
+  "sep-oct": 0.31
+ },
+ "firescope_clases_conjunto": {
+  "Bajo": 3103,
+  "Moderado": 228
+ },
+ "incendios_previos_ha_aprox": {
+  "Navarra": 1200.8,
+  "Tolosaldea": 39.5,
+  "resto de Gipuzkoa": 84.4
+ }
+}

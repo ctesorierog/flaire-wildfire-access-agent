@@ -1,0 +1,39 @@
+clave,valor,explicacion
+version_datos,v0.3.2 + P1-v1 (2026-10-03),Datos territoriales v0.3.2 (vegetación revisada) y prioridad PRIO-v1; tiempos y escenarios v0.3.1 (Persona 2).
+conjunto_analisis,3331 edificios,"Edificio residencial (B5M CURRENTUSE contiene collectiveResidence o individualResidence) cuyo contorno está a ≤ 100 m de bosque o matorral del Mapa Forestal del País Vasco 2024 (forest_* + scrub_heath: TIPES10 11, 12, 14, 21, 23; pastos y prados excluidos). Municipio por punto interior con límites oficiales geoEuskadi 1:5.000. Cada edificio cuenta una vez."
+distancia_vegetacion_m,100,Parámetro de equipo (no oficial).
+origenes_base,9 parques,Parques B5M de Gipuzkoa con en_base=1. OTH-HONDARRIBIA (punto del aeropuerto) excluido. No hay parques de Navarra (sin capa oficial en el paquete).
+red_viaria,OSM País Vasco + Navarra 2026-09-30,"Carreteras de ambos extractos Geofabrik (vías duplicadas en la frontera eliminadas por id OSM). Grafo por defecto sin pistas (track). Velocidad por clase de vía (≈85 % de tramos sin maxspeed), sin tráfico ni giros."
+modelo_tiempo,acceso + red + tramo parcial + acceso,"Acceso en línea recta a 15 km/h desde el punto al tramo más cercano elegible; Dijkstra dirigido desde cada origen. Son ESTIMACIONES de desplazamiento, no tiempos de respuesta (no incluye salida ni preparación)."
+perfil_ligero,velocidad de la vía,Vehículo ligero.
+perfil_camion,"0,9 × (autopista/autovía/primaria) · 0,8 × (resto)","Supuesto de equipo, no medido en camiones de bomberos."
+snap_max_m,150,"Edificio a más de 150 m de una vía elegible → estado_ruta 'sin_ruta: snap>150m'; nunca cubierto, nunca eliminado; cuenta en el denominador."
+redondeo_minutos,"0,01",Tiempos redondeados a 2 decimales; el optimizador trabaja con estos valores (resultados recomputables desde tiempos_*.csv).
+umbral_min,10 / 12 / 15 (12 por defecto),"Umbral de demostración, no un estándar oficial."
+cubierto,min(tiempo desde parques + candidatas elegidas) ≤ umbral,Mínimo por edificio sobre los 9 parques más las candidatas de la selección.
+pct_cubiertos,denominador 3331,Porcentaje sobre TODO el conjunto de análisis (incluye los sin ruta).
+estrategia_A,max cobertura ponderada,"Maximiza la suma de pesos de edificios a ≤ umbral; desempate: más edificios cubiertos, menor peor tiempo, selección alfabética."
+estrategia_B,mejor peor acceso,"Lexicográfico: menos sin ruta, menor peor tiempo, mayor cobertura ponderada, más edificios; después selección alfabética."
+pesos_meteo,solo sensibilidad,"peso_meteo_sensibilidad (jul-ago, ADV-v1) se conserva solo como análisis de sensibilidad: las zonas meteorológicas NO se distinguen con 2018-2023 (meteo_test_zonas.csv), por eso no entra en la prioridad."
+pesos_uniforme,1 por edificio,Comparación: cobertura ponderada = número de edificios.
+cobertura_ponderada,suma del peso elegido de los edificios cubiertos,"Peso recomendado: peso_optimizador (prioridad sin acceso). Alternativas: uniforme, peso_meteo_sensibilidad, peso_firescope_sensibilidad. NO es población protegida."
+regla_ADV-v1,CS-v1 calor seco = ADV-v1,Tmax ≥ 25 °C y HRmin ≤ 40 % y sin día de lluvia (≥ 1 mm) en los 3 días previos. Indicador exploratorio (NO FWI).
+zonas_meteo,C026 Berastegi · C029 Zizurkil · C058 Bidania,"Estación KM más cercana ajustada por altitud (1 m de desnivel = 30 m de distancia), por municipio. C043 Ordizia y estaciones de río solo como contexto."
+temporada,todo el año: días de riesgo,"Días de riesgo = calor seco o viento sur seco. Julio-agosto solo tienen el 14 % de los días de riesgo; febrero-abril el 32 % y septiembre-octubre el 31 %. Propuesta: activar retenes en días de riesgo (meteo_mensual.csv, meteo_dias_riesgo.csv)."
+combinaciones,848,Todas las combinaciones de 0 a 6 de las 10 candidatas (búsqueda exhaustiva).
+k_max,6,Nunca más retenes que candidatas válidas (10).
+empates,número de combinaciones con el mismo objetivo,"Si empates > 1, se guarda la primera en orden alfabético."
+mejora_vs_k0,edificios,edificios_cubiertos(k) − edificios_cubiertos(k=0) del mismo escenario.
+p95_tiempo,percentil 95 (interpolación lineal),"Percentil 95 del mejor tiempo (parques + selección) de los edificios CON ruta; métrica informativa añadida en v0.3.1, no forma parte del objetivo de A ni de B."
+reclasificacion_viaria,service con ref GI-* → unclassified (40 km/h),v0.3.1: vías OSM highway=service que llevan matrícula foral (p. ej. GI-3712 Aldaba auzoa) se tratan como carretera sin clasificar; speed_source = reclass_service_with_GI_ref.
+candidatas,10 sitios de estudio,"Regla transparente (no usa el objetivo del optimizador): elegibilidad, clusters de déficit > 12 min, dispersión max-min, ≥ 3 km entre sí y ≥ 2 km de parques. Candidata ≠ sitio autorizado; 6 comprobaciones de campo pendientes."
+anio_plan,2027,Cambiar el año del plan solo cambia el título; los resultados dependen de la versión de datos.
+datos_faltantes,vacío,"Un valor desconocido se deja vacío, nunca 0."
+pesos_firescope,solo sensibilidad,"peso_firescope_sensibilidad: FireScope (INSAIT) normalizado a media 1. Referencia externa; no entra en la prioridad. Puntuación 0-100 = ráster/2,55 (fs_puntuacion_0_100, fs_clase)."
+ocupacion_O1_O3,décimas de la cubierta arbolada,O1+O2+O3 = 10 en los 14.095 polígonos arbolados del recorte (convención MFE/IFN; confirmar en la ficha oficial).
+masa_mixta,≥ 3 décimas de la otra familia de hoja en SP2+SP3,"Decisión del proyecto (v0.3.2). Sensibilidad en Tolosaldea: 2→1.877 ha, 3→1.059 ha, 4→602 ha, 5→386 ha. No cambia el conjunto de edificios; solo etiquetas de clase."
+vegetacion_proximidad_clases,"TIPES10 11, 12, 14, 21, 23 (prados/pastos 31, 73, 74 excluidos)",Decisión del proyecto: con prados el 87 % de los residenciales quedaría a ≤ 100 m y el criterio no discrimina.
+regla_VS-v1,viento sur seco,"≥ 18 registros de 10 min (≈ 3 h) con viento del sector S (135-225°) ≥ 3 m/s y HR ≤ 50 %, y sin día de lluvia (≥ 1 mm) en los 3 días previos. Detecta el episodio Bera-Aiako Harria (19-21/02/2021)."
+prioridad,Alta ≥ 6 · Media 4-5 · Baja ≤ 3 (puntos 1-8),"Puntos: distancia a vegetación (1-3) + tipo de vegetación (0-2) + acceso actual (0-3) + meteorología (0 para todos). Prioridad de planificación, NO probabilidad de incendio. Ver REGLAS_prioridad.md."
+peso_optimizador,"Alta 3 · Media 2 · Baja 1 → media 1, sin el componente de acceso",Para el optimizador (el acceso ya está en su objetivo; así no se cuenta dos veces). peso_prioridad (con acceso) es para el ranking y los mapas.
+incendios_previos,capa FireScope «Previous Wildfires» 2018-2026 (aproximada),Solo referencia: dentro de Tolosaldea solo Amezketa 2019 (~39 ha); casi todo lo quemado está en Navarra.

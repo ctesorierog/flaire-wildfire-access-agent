@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+# raw downloads and the full 214 MB database are rebuilt by code/pipeline (not committed)
+raw/
+*.osm.pbf
+flaire_full.gpkg

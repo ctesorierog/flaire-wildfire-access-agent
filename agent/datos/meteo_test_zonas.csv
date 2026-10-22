@@ -1,0 +1,4 @@
+zona_a,zona_b,dias_comunes,dif_dias_por_anio,ic95_bajo,ic95_alto,p_permutacion,anios_a_mayor,anios_b_mayor,n_anios,distinguible
+Berastegi,Zizurkil,1496,-10.5,-16.3,-4.6,0.0018,2,4,6,no
+Berastegi,Bidania,1496,-3.4,-7.0,0.2,0.087,1,5,6,no
+Zizurkil,Bidania,1496,7.1,2.0,12.2,0.0076,4,1,6,no

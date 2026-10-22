@@ -1,0 +1,11 @@
+codigo,nombre,tipo,lon,lat,municipio,altitud_proxy_m,mide_viento,usada_en_zonas
+C0EA,Belauntza,KC,-2.04845,43.1424,Belauntza,116,0,0
+C0E8,Araxes,KA,-2.04772,43.1148,Lizartza,244,0,0
+C0E9,Alegia,KC,-2.10488,43.1018,Alegia,117,0,0
+C029,Zizurkil,KM,-2.06181,43.1901,Zizurkil,69,1,1
+C058,Bidania,KM,-2.15502,43.146,Bidania-Goiatz,523,1,1
+C026,Berastegi,KM,-1.98168,43.1248,Berastegi,405,1,1
+C077,Andoain,KC,-2.01559,43.2109,Andoain,,0,0
+C052,Ameraun,KA,-1.95085,43.1417,Berastegi,300,0,0
+C043,Ordizia,KM,-2.17755,43.0484,Ordizia,,1,0
+C0DB,Aitzu,KC,-2.323,43.1141,Zumarraga,,0,0
