@@ -2,7 +2,7 @@
 
 **Top 3 of the Gipuzkoa AI Hackathon (Urban Challenge, October 2026). Invited to present at the MIT City Science Summit Tools Workshop (Donostia, November 2026).**
 
-flAIre helps the fire-prevention planner of Gipuzkoa answer one question: *for July–August, where should up to N extra preventive crews (retenes) be placed in Tolosaldea, and what does each one add?* An LLM agent answers in plain Spanish, but every number comes from deterministic, tested data tools. The agent cites the source and the limits of each figure and refuses to invent what the data can't support.
+flAIre helps the fire-prevention planner of Gipuzkoa answer one question: *where should up to N extra preventive crews (retenes) be placed in Tolosaldea, and what does each one add?* An LLM agent answers in plain Spanish, but every number comes from deterministic, tested data tools. The agent cites the source and the limits of each figure and refuses to invent what the data can't support.
 
 ## Result
 
@@ -13,7 +13,7 @@ For the 3,331 homes within 100 m of forest or scrub in Tolosaldea, light-vehicle
 | 0 (today: 9 fire stations) | – | 2,712 (81.4 %) |
 | 3 | CAND-01, CAND-02, CAND-03 | 3,187 (95.7 %) |
 
-The same three sites are chosen whether homes are weighted by historical fire weather (Euskalmet 2018–2023), by the FireScope AI risk index, or not weighted at all.
+CAND-02 (Amezketa) and CAND-03 are chosen under every travel-time threshold and vehicle we tested; the third site is a judgement call (a 6-building margin). In this version the weather weighting has no effect on the result yet, so we don't claim the choice is robust across weightings.
 
 ## How it works
 
