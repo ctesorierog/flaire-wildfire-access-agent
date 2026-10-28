@@ -66,7 +66,7 @@ python app/run_agent_once.py "¿Dónde pongo el primer retén?"   # one full age
 | `reports/` | `sources.csv` (URL, licence, date, sha256 per dataset), data-quality reports, link validation (12/12 hand checks), candidate site records, orthophotos |
 | `tests/` | The test suite |
 | `deck/` | The 2-minute talk and its screenshots |
-| `docs/` | `QA.md` (hard questions with the evidence behind each answer) and real agent transcripts with claim-by-claim checks |
+| `docs/` | `flaire_how_it_works.pdf` (how the code works, chapter by chapter, with file and line for every point), `QA.md` (hard questions with the evidence behind each answer) and real agent transcripts with claim-by-claim checks |
 
 ## Honest limits
 
