@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e1013">
+<title>flAIre · Tolosaldea</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230e1013'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%23f1c27d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="forest.jpg" as="image">
+<link rel="stylesheet" href="app.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" integrity="sha384-+VfUPEb0PdtChMwmBcBmykRMDd+v6D/oFmB3rZM/puCMDYcIvF968OimRh4KQY9a" crossorigin="anonymous"></script>
+</head>
+<body class="at-home">
+<a class="skip" href="#q-home">Skip to the question box</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-half" viewBox="0 0 16 16"><path d="M4 8h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-dot" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14.5s4.5-4.2 4.5-7.8A4.5 4.5 0 0 0 3.5 6.7c0 3.6 4.5 7.8 4.5 7.8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.6" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 11l3-3 2.5 2.5 1.5-1.5 2 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- Home: the forest, the question, today's number -->
+<section class="home" id="home" aria-labelledby="home-h">
+  <div class="home-bg" aria-hidden="true"></div>
+  <div class="home-screen">
+  <header class="topbar">
+    <span class="brand" translate="no">fl<span>AI</span>re</span>
+    <nav class="topnav" aria-label="Main">
+      <button type="button" class="link" data-go="map">Map</button>
+      <button type="button" class="link" data-go="chat">Chat</button>
+      <button type="button" class="link" data-open="limits">Sources and Limits</button>
+    </nav>
+  </header>
+  <div class="home-copy">
+    <p class="place">Tolosaldea · Gipuzkoa</p>
+    <h1 id="home-h" class="serif">Where should the next preventive crew <em>go?</em></h1>
+    <p class="lede">3,331 homes stand at the edge of this forest. Ask in your own words; every figure comes from a tool run on the project's data.</p>
+    <form class="ask-box" id="ask-home">
+      <label for="q-home" class="sr-only">Question for flAIre</label>
+      <input id="q-home" name="question" type="text" lang="es" autocomplete="off" placeholder="Pregunta a flAIre… «¿Dónde pongo el primer retén?»">
+      <button type="submit" class="ask">Ask</button>
+    </form>
+    <div class="starters" id="starters" lang="es"></div>
+  </div>
+  <aside class="home-stat" aria-label="Today">
+    <p class="big serif"><span id="stat-pct">81.4</span><small>%</small></p>
+    <p>of homes are within 12 min of a fire station today: <b>2,712 of 3,331</b>. The other 619 are what the crews are for.</p>
+  </aside>
+  <p class="hero-credit" id="hero-credit" hidden></p>
+  <button type="button" class="to-map" data-go="map">Open the Map <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </div>
+  <footer class="site-foot">
+    <div>
+      <p class="brand" translate="no">fl<span>AI</span>re</p>
+      <p>Team urbAIn · Gipuzkoa AI Hackathon, Urban Challenge finalist</p>
+      <p>Tecnun – Universidad de Navarra</p>
+    </div>
+    <div>
+      <h2>Team and contact</h2>
+      <ul>
+        <li>Carlos Tesoriero · <a href="mailto:ctesorierog@alumni.unav.es">ctesorierog@alumni.unav.es</a></li>
+        <li>Luca Castagnet · <a href="mailto:lcastagnet@alumni.unav.es">lcastagnet@alumni.unav.es</a></li>
+      </ul>
+    </div>
+    <p class="foot-note">Study sites, not authorised sites. Travel times are estimates, not response times.</p>
+  </footer>
+</section>
+
+<!-- Workspace: the map and the findings -->
+<main class="work" id="work" aria-label="Map and findings" data-pane="map">
+  <nav class="tabs" aria-label="Map or chat">
+    <button type="button" class="tab" data-go="home">Home</button>
+    <button type="button" class="tab" data-go="map" aria-pressed="true">Map<i class="new" id="tabs-new" hidden><span class="sr-only"> (updated)</span></i></button>
+    <button type="button" class="tab" data-go="chat" aria-pressed="false">Chat</button>
+  </nav>
+  <h1 class="sr-only">flAIre map of Tolosaldea</h1>
+  <section class="stage" aria-label="Map of Tolosaldea">
+    <header class="stage-top">
+      <button type="button" class="brand link" data-go="home" translate="no" aria-label="Home">fl<span>AI</span>re</button>
+      <nav class="worknav" aria-label="Main">
+        <button type="button" class="link" data-go="home">Home</button>
+        <button type="button" class="link" data-open="limits">Sources and Limits</button>
+      </nav>
+      <span class="params">Tolosaldea · 12 min · light vehicle</span>
+    </header>
+
+    <div class="counter" aria-live="polite">
+      <p class="count serif"><span id="c-in">2,712</span> <small>/ 3,331<span class="long"> homes within 12 min</span></small></p>
+      <p class="delta" id="c-delta">Today: 9 fire stations (1 inside Tolosaldea).</p>
+      <p class="steps-label" id="steps-label">Extra crews</p>
+      <div class="steps" role="group" aria-labelledby="steps-label">
+        <button type="button" data-step="0" aria-pressed="true">0</button>
+        <button type="button" data-step="1" aria-pressed="false">+1</button>
+        <button type="button" data-step="2" aria-pressed="false">+2</button>
+        <button type="button" data-step="3" aria-pressed="false">+3</button>
+      </div>
+    </div>
+
+    <div class="map" id="map">
+      <img id="forest" src="forest.jpg" alt="" width="2000" height="2278">
+      <canvas id="dots" aria-label="Homes coloured by whether a fire station or crew reaches them within 12 minutes" role="img"></canvas>
+    </div>
+
+    <figure class="site-pop" id="site-pop" hidden>
+      <button type="button" class="close" id="site-close" aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <img id="site-img" alt="" width="800" height="800" hidden>
+      <figcaption id="site-cap"></figcaption>
+    </figure>
+
+    <footer class="stage-foot">
+      <button type="button" class="key-btn" id="key-btn" aria-expanded="false" aria-controls="key">Key</button>
+      <ul class="key" id="key" hidden>
+        <li class="key-note">Each dot is a residential building at the forest edge (3,331).</li>
+        <li><i class="k-in"></i>Within 12 min today</li>
+        <li><i class="k-lit"></i>Brought inside by the crews</li>
+        <li><i class="k-out"></i>Still outside</li>
+        <li><i class="k-site"></i>Study site (click for its photo)</li>
+        <li><i class="k-park"></i>Fire station</li>
+        <li class="key-sites"><span>Study sites</span><div id="site-list"></div></li>
+      </ul>
+      <p class="credit">Forest: Mapa Forestal 2024, Gobierno Vasco · Roads © OpenStreetMap contributors (ODbL) · Estimated road times · Study sites, not authorised bases</p>
+    </footer>
+  </section>
+
+  <aside class="drawer" aria-label="Findings">
+    <header class="drawer-top">
+      <h2>Findings</h2>
+      <button type="button" class="ghost" id="new-notebook"><svg aria-hidden="true"><use href="#i-plus"/></svg>New Session</button>
+    </header>
+    <div class="feed" id="feed">
+      <div class="feed-empty" id="feed-empty"><p>Ask a question below. Each answer becomes a finding here, and the map lights the homes its crews reach.</p><div class="starters" id="starters-feed" lang="es"></div></div>
+      <div id="notebook"></div>
+    </div>
+    <form class="composer" id="composer">
+      <label for="q" class="sr-only">Question for flAIre</label>
+      <textarea id="q" name="question" rows="1" lang="es" placeholder="Pregunta a flAIre…" autocomplete="off"></textarea>
+      <span class="status" id="status" aria-live="polite"></span>
+      <button type="submit" class="ask" id="ask">Ask</button>
+    </form>
+  </aside>
+</main>
+
+<dialog class="limits" id="limits" aria-labelledby="limits-h">
+  <h2 id="limits-h">Sources and Limits</h2>
+  <ul>
+    <li><b>Times are estimates</b> of road travel from each station or site, not real response times.</li>
+    <li><b>The 10 candidates are study sites</b>, not authorised bases. Only CAND-01 to 04 have been checked on an orthophoto.</li>
+    <li><b>Priority is for planning</b> (distance to forest, vegetation, access), not a probability of fire.</li>
+    <li><b>12 minutes is a demonstration threshold</b>, stricter than the fire service's own 15-minute target.</li>
+  </ul>
+  <p class="src">Homes, priority and travel times: flAIre delivered data (Gipuzkoa AI Hackathon, Oct 2026); road network © OpenStreetMap contributors, ODbL. Forest: Mapa Forestal del País Vasco 2024, Gobierno Vasco. Orthophotos: Eusko Jaurlaritza / Gobierno Vasco, geoEuskadi.</p>
+  <form method="dialog"><button class="ask">Close</button></form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

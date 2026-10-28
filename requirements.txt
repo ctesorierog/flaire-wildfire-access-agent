@@ -1,0 +1,32 @@
+# flAIre Python dependencies (Python 3.11).
+# Recommended on Windows: install the geospatial stack from conda-forge, then langchain with pip:
+#   conda create -n flaire -c conda-forge --override-channels python=3.11 numpy pandas scipy scikit-learn geopandas shapely pyproj pyogrio pyarrow networkx pyosmium pytest
+#   conda activate flaire
+#   python -m pip install langchain==1.4.7 langchain-core==1.7.0
+# `studio` and `ejecucion` come from the hackathon platform (not on PyPI); app/studio.py stands in for `studio` off-platform.
+# The web app and the agent runner also need app/requirements-web.txt (anthropic, langchain-anthropic, langgraph).
+
+# Data and numerics
+numpy==2.4.6
+pandas==3.1.0
+scipy==1.17.1
+scikit-learn==1.9.1
+pyarrow==25.0.0
+
+# Geospatial and network
+geopandas==1.2.0
+shapely==2.2.0
+pyproj==3.7.2
+pyogrio==0.13.0
+networkx==3.6.1
+osmium==4.3.1  # conda-forge name: pyosmium
+
+# Agent
+langchain==1.4.7
+langchain-core==1.7.0
+
+# Tests
+pytest==9.1.1
+
+# Reading source PDFs (e.g. the SPEIS annual report)
+pypdf==6.21.2

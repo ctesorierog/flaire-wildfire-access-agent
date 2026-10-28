@@ -1,8 +1,21 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Pipeline work files (raw downloads, rebuilt tables, reports, database) and app output
+work/
+data/external/
+app/_informes/
+
+# Python
 __pycache__/
 *.pyc
 .pytest_cache/
-.env
-# raw downloads and the full 214 MB database are rebuilt by code/pipeline (not committed)
-raw/
-*.osm.pbf
-flaire_full.gpkg
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

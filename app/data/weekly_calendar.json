@@ -1,0 +1,397 @@
+{
+ "meta": {
+  "area": "tolosaldea",
+  "generated": "2026-10-27",
+  "years": [
+   2018,
+   2023
+  ],
+  "stations": {
+   "C026": "Berastegi",
+   "C029": "Zizurkil",
+   "C058": "Bidania"
+  },
+  "rule": "CS-v1 OR VS-v1",
+  "method": "Risk day = dry heat (Tmax ≥ 25 °C, RH min ≤ 40 %, no rain ≥ 1 mm in the 3 days before) OR dry south wind (≥ 3 h of S wind ≥ 3 m/s with RH ≤ 50 %, same rain condition). Euskalmet stations, 2018–2023. risk_days = mean per station and year in that ISO week, missing days scaled out.",
+  "limits": [
+   "Exploratory project rules, not FWI and not fire probability.",
+   "Only 6 years: single weeks are noisy. Read the seasons, not one week.",
+   "Not checked against fire records; it shows when the weather was risky, not when fires happened.",
+   "Seasonal staffing only: the sites don't change by week (the 3 zones can't be told apart)."
+  ]
+ },
+ "summary": {
+  "risk_days_per_year": 26.4,
+  "season_share": {
+   "feb_apr": 0.324,
+   "jul_aug": 0.138,
+   "sep_oct": 0.312
+  }
+ },
+ "weeks": [
+  {
+   "week": 1,
+   "month": 1,
+   "risk_days": 0.31,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 2,
+   "month": 1,
+   "risk_days": 0.06,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 3,
+   "month": 1,
+   "risk_days": 0.3,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 4,
+   "month": 1,
+   "risk_days": 0.0,
+   "years_with_risk_day": 0,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 5,
+   "month": 2,
+   "risk_days": 0.0,
+   "years_with_risk_day": 0,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 6,
+   "month": 2,
+   "risk_days": 0.71,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 7,
+   "month": 2,
+   "risk_days": 1.81,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 8,
+   "month": 2,
+   "risk_days": 0.63,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 9,
+   "month": 3,
+   "risk_days": 0.49,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 10,
+   "month": 3,
+   "risk_days": 0.37,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 11,
+   "month": 3,
+   "risk_days": 0.06,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 12,
+   "month": 3,
+   "risk_days": 1.11,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 13,
+   "month": 3,
+   "risk_days": 1.14,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 14,
+   "month": 4,
+   "risk_days": 0.63,
+   "years_with_risk_day": 5,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 15,
+   "month": 4,
+   "risk_days": 0.11,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 16,
+   "month": 4,
+   "risk_days": 1.24,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 17,
+   "month": 4,
+   "risk_days": 0.24,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 18,
+   "month": 5,
+   "risk_days": 0.3,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 19,
+   "month": 5,
+   "risk_days": 0.48,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 20,
+   "month": 5,
+   "risk_days": 0.45,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 21,
+   "month": 5,
+   "risk_days": 0.06,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 22,
+   "month": 5,
+   "risk_days": 0.79,
+   "years_with_risk_day": 5,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 23,
+   "month": 6,
+   "risk_days": 0.42,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 24,
+   "month": 6,
+   "risk_days": 0.46,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 25,
+   "month": 6,
+   "risk_days": 0.25,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 26,
+   "month": 6,
+   "risk_days": 0.46,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 27,
+   "month": 7,
+   "risk_days": 0.13,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 28,
+   "month": 7,
+   "risk_days": 0.5,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 29,
+   "month": 7,
+   "risk_days": 0.33,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 30,
+   "month": 7,
+   "risk_days": 0.33,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 31,
+   "month": 8,
+   "risk_days": 0.06,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 32,
+   "month": 8,
+   "risk_days": 0.83,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 33,
+   "month": 8,
+   "risk_days": 0.32,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 34,
+   "month": 8,
+   "risk_days": 0.89,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 35,
+   "month": 8,
+   "risk_days": 0.47,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 36,
+   "month": 9,
+   "risk_days": 1.69,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 37,
+   "month": 9,
+   "risk_days": 0.83,
+   "years_with_risk_day": 5,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 38,
+   "month": 9,
+   "risk_days": 1.23,
+   "years_with_risk_day": 4,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 39,
+   "month": 9,
+   "risk_days": 0.57,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 40,
+   "month": 10,
+   "risk_days": 0.55,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 41,
+   "month": 10,
+   "risk_days": 0.89,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 42,
+   "month": 10,
+   "risk_days": 0.6,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 43,
+   "month": 10,
+   "risk_days": 1.56,
+   "years_with_risk_day": 3,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 44,
+   "month": 11,
+   "risk_days": 0.18,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 45,
+   "month": 11,
+   "risk_days": 0.36,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 46,
+   "month": 11,
+   "risk_days": 0.06,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 47,
+   "month": 11,
+   "risk_days": 0.0,
+   "years_with_risk_day": 0,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 48,
+   "month": 11,
+   "risk_days": 0.18,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 49,
+   "month": 12,
+   "risk_days": 0.0,
+   "years_with_risk_day": 0,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 50,
+   "month": 12,
+   "risk_days": 0.19,
+   "years_with_risk_day": 1,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 51,
+   "month": 12,
+   "risk_days": 0.24,
+   "years_with_risk_day": 2,
+   "days_in_week": 7.0
+  },
+  {
+   "week": 52,
+   "month": 12,
+   "risk_days": 0.54,
+   "years_with_risk_day": 4,
+   "days_in_week": 8.17
+  }
+ ]
+}

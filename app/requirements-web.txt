@@ -1,0 +1,8 @@
+# Only what the chat app server needs (Render build). The full pipeline and tests use ../requirements.txt.
+numpy==2.4.6
+pandas==3.1.0
+anthropic==1.17.0
+langchain==1.4.7
+langchain-core==1.7.0
+langchain-anthropic==1.7.6
+langgraph==1.2.16

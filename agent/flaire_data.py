@@ -631,6 +631,27 @@ def _optimizar_cache(k_max: int, estrategia: str, umbral: float, perfil: str, pe
     return dict(per_k=per_k, wt=wt, n_combos=len(combos))
 
 
+def greedy_cobertura(cubierto_base: np.ndarray, cubre: np.ndarray, k: int) -> list:
+    """Greedy maximal coverage, for pools too big to enumerate (PLAN.md item 9).
+
+    cubierto_base: (n,) bool, homes already within the threshold from the parks.
+    cubre: (m, n) bool, homes each site reaches within the threshold.
+    Up to k times, adds the site that reaches the most homes not yet covered (ties: lowest index); stops early when no
+    site adds anything. Returns [(site index, homes gained)] in order of choice.
+    """
+    cubierto = np.asarray(cubierto_base, dtype=bool).copy()
+    cubre = np.asarray(cubre, dtype=bool)
+    pasos = []
+    for _ in range(k):
+        gains = (cubre & ~cubierto).sum(axis=1)
+        j = int(np.argmax(gains)) if len(gains) else 0
+        if not len(gains) or gains[j] == 0:
+            break
+        pasos.append((j, int(gains[j])))
+        cubierto |= cubre[j]
+    return pasos
+
+
 def _clave(m, estrategia):
     if estrategia == "A":
         return (-round(m["pond"], 9), -m["n_cub"], round(m["peor"] if m["peor"] is not None else math.inf, 9))

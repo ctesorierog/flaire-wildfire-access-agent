@@ -1,63 +1,87 @@
-# flAIre: a data agent for wildfire-access planning in Gipuzkoa
+# flAIre · where should the next wildfire crews go?
 
-**Top 3 of the Gipuzkoa AI Hackathon (Urban Challenge, October 2026). Invited to present at the MIT City Science Summit Tools Workshop (Donostia, November 2026).**
+flAIre is a data agent for the fire-prevention planner of Gipuzkoa (Basque Country, Spain). It answers one question for the district of **Tolosaldea**: *where should up to N extra preventive crews (retenes) go, and what does each one add?* Every number comes from a tool call on open data, with its source and its limits next to it.
 
-flAIre helps the fire-prevention planner of Gipuzkoa answer one question: *where should up to N extra preventive crews (retenes) be placed in Tolosaldea, and what does each one add?* An LLM agent answers in plain Spanish, but every number comes from deterministic, tested data tools. The agent cites the source and the limits of each figure and refuses to invent what the data can't support.
+Built by team urbAIn for the Gipuzkoa AI Hackathon 2026 (Urban Challenge, top-3 finalist) and presented at the MIT City Science Summit, Tools Workshop (5 Nov 2026, Tabakalera, Donostia).
 
-## Result
+![The flAIre web app: where the first crew goes and what it adds](deck/screens/app_first_crew.png)
 
-For the 3,331 homes within 100 m of forest or scrub in Tolosaldea, light-vehicle access within 12 minutes:
+## The answer, in numbers
 
-| Extra crews | Sites | Homes reached in 12 min |
-|---|---|---|
-| 0 (today: 9 fire stations) | – | 2,712 (81.4 %) |
-| 3 | CAND-01, CAND-02, CAND-03 | 3,187 (95.7 %) |
+Within **12 minutes by road** (light vehicle), today's 9 fire stations reach **2,712 of 3,331 homes (81.4 %)** that sit within 100 m of forest or scrub.
 
-CAND-02 (Amezketa) and CAND-03 are chosen under every travel-time threshold and vehicle we tested; the third site is a judgement call (a 6-building margin). In this version the weather weighting has no effect on the result yet, so we don't claim the choice is robust across weightings.
+| Extra crews | Sites | Homes within 12 min | High-priority (Alta) homes |
+|---|---|---|---|
+| 0 | today | 2,712 (81.4 %) | 49 of the 209 reachable |
+| 1 | Amezketa (CAND-02) | 2,958 (88.8 %), +246 | 119 |
+| 2 | + Asteasu (CAND-01) | 3,083, +125 | 165 |
+| 3 | + Berastegi (CAND-03) | 3,187 (95.7 %), +104 | 177 |
+
+**What holds and what doesn't.** Amezketa and Berastegi are in the best three sites at 10, 12 and 15 minutes and with both vehicle types. The third site changes (CAND-01, 08 or 10) and wins by only 3 to 19 buildings (6 at the headline), so it is the planner's judgement call, not ours (`app/data/stability.json`). On the orthophoto, CAND-01 is a roadmen's house with no yard: one more reason it is a judgement call. All of this is with every building weighted 1; we make no claim across weightings.
+
+**When.** Only 14 % of risk-weather days fall in July–August; 32 % fall in February–April and 31 % in September–October (`app/data/weekly_calendar.json`). Weather says *when* to activate crews, not *where*.
+
+**Beyond Tolosaldea.** Today's coverage for all of Gipuzkoa: 20,908 of 25,323 exposed homes (82.6 %) within 12 minutes; Tolosaldea ranks 4th of 7 districts (`app/data/gipuzkoa_baseline.json`). Crews were placed only in Tolosaldea.
+
+"Homes" means residential buildings (they hold 10,651 dwellings), not people.
+
+## Run it
+
+Python 3.11. The geospatial stack is easiest from conda-forge (see the comments in `requirements.txt`).
+
+```bash
+pip install -r requirements.txt -r app/requirements-web.txt
+cp .env.example .env          # add your ANTHROPIC_API_KEY
+python app/server.py          # http://localhost:8770
+```
+
+Ask in Spanish, e.g. «¿Dónde pongo el primer retén y por qué?». The answer shows the tool calls behind it, the map relights with the crews, and a study site can show its orthophoto.
+
+Check the numbers without an API key:
+
+```bash
+python -m pytest -q tests          # 64 passed, 11 skipped (the 11 need the pipeline rebuilt from raw data)
+python pipeline/qa_evidence.py     # every number in docs/QA.md
+python app/run_agent_once.py "¿Dónde pongo el primer retén?"   # one full agent answer (needs the key)
+```
 
 ## How it works
 
-1. **Data pipeline** (`code/pipeline/`): official open data is cleaned and linked.
-   - 28 municipalities; 124,140 → 14,015 buildings → 3,331 residential homes near vegetation (Mapa Forestal 2024).
-   - A routable OpenStreetMap road graph (415k edges, motorway ramps included, light-vehicle and truck speed profiles).
-   - 16.7 M ten-minute weather readings.
-   - 532k travel times from 9 fire stations and 10 candidate sites to every home.
-2. **Database** (`database/`): a 36-table schema with integrity rules (`schema.sql`) and a 15 MB GeoPackage (`flaire_lite.gpkg`). The full 214 MB database is reproducible with `code/pipeline/link_build.py`.
-3. **Optimizer** (`code/manager/optimizer.py`): an exhaustive search over all 848 candidate combinations × 36 scenarios. It compares strategy A (maximise homes within the threshold) with strategy B (improve the worst access). Unit-tested in `test_optimizer.py`.
-4. **Priority module** (`code/prioridad/`): ranks homes by vegetation, building data and historical adverse-weather days.
-5. **Agent** (`agent/`): runs on the hackathon's agent platform with 10 tools, including coverage, comparison, scenario lookup, maps, figure checking (`comprobar_cifra`) and an HTML report generator. `flaire_data.py` holds the validated query layer. The data the agent reads is in `agent/datos/`.
-6. **Evaluation**: 26 agent tests with a fake platform module (`code/tests_agente/`), 11 QA views and 11 hand checks of travel times (`docs/linker_validation.md`).
+1. **Homes at risk:** residential buildings from the official cadastre (B5M) within 100 m of forest or scrub in the 2024 Forest Map, 28 municipalities.
+2. **Priority:** each home gets Alta / Media / Baja planning priority from distance to vegetation, vegetation type and current access (`agent/data/REGLAS_prioridad.md`). It is a planning priority, not a fire probability.
+3. **Travel times:** 532,000 estimated road times on the OpenStreetMap network, from the 9 stations and 10 candidate study sites, for a light vehicle and a truck.
+4. **Optimizer:** tries every combination of 0 to 6 of the 10 sites (848) and keeps the one that brings the most homes inside the threshold (`pipeline/optimizer.py`).
+5. **Agent:** a LangChain agent with 10 deterministic tools over that data (`agent/`). The model writes the sentences; every number comes from a tool, and `comprobar_cifra` recounts it independently.
 
-## Try the data layer
+## Repository map
 
-```bash
-pip install pandas
-cd agent
-python -c "import flaire_data as f; print(f.cobertura(k=3)['resultado'])"
-```
-
-`example_report/` contains a generated report: two synced maps, a benefit chart and a manifest listing the source of every figure.
+| Folder | What it holds |
+|---|---|
+| `agent/` | The FINAL agent: prompt, 10 tools, data layer, report maps; `CHANGES.md` says what changed from v3 and since the hackathon |
+| `agent/data/` | The data the agent reads (CSV/JSON, 2 MB) with a data dictionary and the priority rules (Spanish) |
+| `app/` | Web app: stdlib server, static page, map, the off-platform agent runner |
+| `app/data/` | JSON tables the screens read, each written by a tested exporter in `pipeline/` |
+| `pipeline/` | Rebuild from raw data, the exhaustive optimizer, exporters, `qa_evidence.py`; `pipeline/priority/` builds the priority score |
+| `data/` | Small inputs the tests need, the database schema, and how to download the large layers (`data/README.md`) |
+| `reports/` | `sources.csv` (URL, licence, date, sha256 per dataset), data-quality reports, link validation (12/12 hand checks), candidate site records, orthophotos |
+| `tests/` | The test suite |
+| `deck/` | The 2-minute talk and its screenshots |
+| `docs/` | `QA.md` (hard questions with the evidence behind each answer) and real agent transcripts with claim-by-claim checks |
 
 ## Honest limits
 
-- Travel times are estimates from assumed speeds (only about 14 % of roads have a tagged speed limit), not real response times.
-- The 12-minute threshold is for the demo, not an official standard.
-- Candidate sites are study locations, not authorised bases.
-- Historical adverse-weather frequency is not fire probability.
-- FireScope is used only as an experimental, third weighting.
+- Travel times are **estimates** on assumed speeds (about 85 % of roads have no speed limit tagged), not response times; there is no turnout time. The 12-minute threshold is for the study, not an official target.
+- Candidate sites are **study locations, not authorised bases**: shelter, water, turning space, radio and permission are unchecked.
+- There are **no stations outside Gipuzkoa** in the data (Navarra, Bizkaia, Araba), so border areas can look worse than they are.
+- Risk-weather days come from an exploratory rule on 3 Euskalmet stations (2018–2023), not FWI and not fire probability; the 3 weather zones can't be told apart.
+- FireScope (INSAIT) is a third-party AI model, used only as an experimental comparison, never in the score.
+- The weather part of the priority score is switched off (0 for every home), so the "meteo" weighting is inert.
+- Nothing here is official cartography or an operational plan.
 
 ## Data and licences
 
-OpenStreetMap (ODbL), Euskalmet / Open Data Euskadi (CC BY 4.0), geoEuskadi, Mapa Forestal del País Vasco 2024, Diputación Foral de Gipuzkoa B5M (CC BY 4.0), and INSAIT FireScope (CC BY 4.0). Derived travel times and candidates are shared under ODbL. Details: `docs/LICENCIAS.md` and `docs/sources.csv` (URL, licence, date and sha256 for every dataset).
+Code: MIT (`LICENSE`). Data: see `DATA_LICENSE.md` and the attributions in `NOTICE.md`. Every source dataset is listed with its URL, licence, download date and checksum in `reports/sources.csv`.
 
-## Stack
+## Team
 
-Python, pandas, GeoPandas/GDAL, SQL + GeoPackage, OpenStreetMap routing, pytest, LLM tool calling.
-
-## Team urbAIn
-
-Felipe Salazar, Carlos Tesoriero, Luca Castagnet and Santiago Mariño.
-
-Carlos's work: the data and access track (fire-station access, candidate sites and travel times), then the territorial priority module (buildings, vegetation and historical weather).
-
-A web-app version for the MIT City Science Summit is in progress.
+urbAIn: Felipe Salazar, Carlos Tesoriero, Luca Castagnet, Santiago Mariño (Tecnun – Universidad de Navarra). Built by humans directing AI coding agents; the errors the agents made, and how we caught them, are in `docs/QA.md` and `docs/transcripts/`.

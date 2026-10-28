@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "area": "tolosaldea",
+    "generated": "2026-10-27",
+    "data_version": "v0.3.1",
+    "n_buildings": 3331,
+    "k": 3,
+    "method": "Exhaustive search over all 120 combinations of 3 of the 10 study sites (05_codigo/manager/optimizer.py, every building weighted 1).",
+    "limits": [
+      "Estimated road travel times, not response times.",
+      "Study sites, not authorised sites.",
+      "Every building weighted 1: robustness across weightings is not shown.",
+      "Runner-up = second-best combination of 3 (runner_up_ties > 1: others share its count); margin = buildings between them."
+    ]
+  },
+  "rows": [
+    {
+      "profile": "light",
+      "threshold_min": 10,
+      "today_covered": 2207,
+      "today_pct": 66.3,
+      "pick": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-08"
+      ],
+      "covered": 2985,
+      "pct_covered": 89.6,
+      "runner_up": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-10"
+      ],
+      "runner_up_covered": 2966,
+      "runner_up_ties": 1,
+      "margin": 19
+    },
+    {
+      "profile": "light",
+      "threshold_min": 12,
+      "today_covered": 2712,
+      "today_pct": 81.4,
+      "pick": [
+        "CAND-01",
+        "CAND-02",
+        "CAND-03"
+      ],
+      "covered": 3187,
+      "pct_covered": 95.7,
+      "runner_up": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-10"
+      ],
+      "runner_up_covered": 3181,
+      "runner_up_ties": 1,
+      "margin": 6
+    },
+    {
+      "profile": "light",
+      "threshold_min": 15,
+      "today_covered": 3148,
+      "today_pct": 94.5,
+      "pick": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-10"
+      ],
+      "covered": 3280,
+      "pct_covered": 98.5,
+      "runner_up": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-06"
+      ],
+      "runner_up_covered": 3277,
+      "runner_up_ties": 2,
+      "margin": 3
+    },
+    {
+      "profile": "truck",
+      "threshold_min": 10,
+      "today_covered": 1827,
+      "today_pct": 54.8,
+      "pick": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-10"
+      ],
+      "covered": 2570,
+      "pct_covered": 77.2,
+      "runner_up": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-06"
+      ],
+      "runner_up_covered": 2564,
+      "runner_up_ties": 1,
+      "margin": 6
+    },
+    {
+      "profile": "truck",
+      "threshold_min": 12,
+      "today_covered": 2177,
+      "today_pct": 65.4,
+      "pick": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-08"
+      ],
+      "covered": 2937,
+      "pct_covered": 88.2,
+      "runner_up": [
+        "CAND-02",
+        "CAND-05",
+        "CAND-08"
+      ],
+      "runner_up_covered": 2920,
+      "runner_up_ties": 1,
+      "margin": 17
+    },
+    {
+      "profile": "truck",
+      "threshold_min": 15,
+      "today_covered": 2776,
+      "today_pct": 83.3,
+      "pick": [
+        "CAND-01",
+        "CAND-02",
+        "CAND-03"
+      ],
+      "covered": 3200,
+      "pct_covered": 96.1,
+      "runner_up": [
+        "CAND-02",
+        "CAND-03",
+        "CAND-10"
+      ],
+      "runner_up_covered": 3190,
+      "runner_up_ties": 1,
+      "margin": 10
+    }
+  ]
+}
